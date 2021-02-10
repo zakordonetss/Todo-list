@@ -6,7 +6,7 @@ import TodoPage from '../pages/TodoPage'
 export default new VueRouter({
     routes: [
         {
-            path: '',
+            path: '/',
             component: LoginPage
         },
         {
