@@ -1,14 +1,13 @@
 <template>
   <div id="app">
-    <h1>Todo List</h1>
-      <TodoList 
-        :todos = 'todos'
+      <h1>Todo application</h1>
+      <router-view 
+        :todos ='todos'
       />
   </div>
 </template>
 
 <script>
-import TodoList from "@/components/TodoList"
 
 export default {
   name: 'App',
@@ -19,10 +18,7 @@ export default {
               {id: 2, text: 'Todo 2', completed: false},
               {id: 3, text: 'Todo 3', completed: false},
           ]
-      }
-  },
-  components: {
-      TodoList
+      };
   }
 }
 </script>

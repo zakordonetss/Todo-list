@@ -1,6 +1,9 @@
 <template>
     <div>
-        <li>{{todo.text}}</li>
+        <form action="">
+            <li>{{todo.text}}</li> 
+            <button>Delete</button>
+        </form>
     </div>
 </template>
 
