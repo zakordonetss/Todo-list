@@ -63,7 +63,7 @@ export default {
     },
 
     created() {
-        localStorage.getItem('logedIn') ? this.$router.push('/todo') : this.$router.push('/');
+        if (!localStorage.getItem('logedIn')) this.$router.push('/');
     },
 }
 </script>
