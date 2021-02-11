@@ -1,6 +1,6 @@
 <template>
     <form @submit.prevent="onAdd" >
-        <input type="text" v-model="text">
+        <input type="text" v-model="text" placeholder="Your note...">
         <button class="btn">Add todo</button>
     </form>
 </template>
@@ -33,7 +33,7 @@ export default {
 <style scoped>
     input {
         display: block;
-        width: 100%;
+        width: 98%;
         padding: 8px;
         font-size: 18px;
         border: 1px solid #333333;

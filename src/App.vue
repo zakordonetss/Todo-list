@@ -25,6 +25,10 @@ export default {
   max-width: 800px;
 }
 
+body {
+  margin: 0;
+}
+
 .btn {
     display: inline-block;
     background: #333333;
@@ -50,7 +54,15 @@ export default {
 .bar {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     font-size: 15px;
+    background-color: #333333;
+    height: 40px;
+    color: white;
+}
+
+.logo {
+    padding: 0 10px;
 }
 
 .btn-bar {
@@ -58,10 +70,15 @@ export default {
     background-color: inherit;
     border: none;
     cursor: pointer;
+    color: white;
+    height: 100%;
+    padding: 0 10px;
+    transition: all .1s linear;
 }
 
 .btn-bar:hover {
-    text-decoration: underline;
+    /* text-decoration: underline; */
+    background-color: #1a1a1a;
 }
 
 .router-link {

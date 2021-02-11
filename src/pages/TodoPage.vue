@@ -1,18 +1,18 @@
 <template>
     <div>
         <header class="bar">
-          <strong>Todo Application</strong>
+          <strong class="logo">Todo Application</strong>
           <button 
             class="btn-bar"
             @click="logOut"
           ><strong>Log Out</strong></button>
         </header>
-        <h2>Task list by {{ username }} </h2>
+        <h3>User: {{ username }} </h3>
 
         <CreateTodo
             @add-todo="addTodo"
          />
-        <h2>Todos List</h2>
+        <h3>Todos List</h3>
         <hr>
         <h5 v-if="todos.length == 0">There are no notes yet. Please add the first one!</h5>
         <ul>

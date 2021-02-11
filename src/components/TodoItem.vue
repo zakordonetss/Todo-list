@@ -3,14 +3,14 @@
         <li>
             <div class="container">
                 <div class="text" :class="{done:todo.completed}">
-                    <label class='checkbox-other' for="">
+                    <label class='checkbox-other' for="check">
                         <input 
+                            id="check"
                             type="checkbox" 
                             @change="todo.completed = !todo.completed"
                         >
                     </label>
-                        
-                    {{todo.text}}
+                    {{todo.text}}            
                 </div>
 
                 <div class="container-btn">
@@ -103,32 +103,32 @@ export default {
     }
 
     .btn-delete {
-        background-color:darkred;
+        background-color:rgb(179, 49, 49);
         color: white;
         cursor: pointer;
-        border-color: darkred;
+        border-color: rgb(179, 49, 49);
         height: 32px;
         margin: 5px;
     }
 
     .btn-delete:hover {
         background-color:white;
-        color: darkred;
+        color: rgb(179, 49, 49);
     }
 
     .btn-edit {
         display: none;
-        background-color: rgb(0, 83, 161);
+        background-color: rgb(31, 85, 136);
         color: white;
         cursor: pointer;
-        border-color: rgb(0, 83, 161);
+        border-color: rgb(31, 85, 136);
         height: 32px;
         margin: 5px;
     }
 
     .btn-edit:hover {
         background-color:white;
-        color: rgb(0, 83, 161);
+        color: rgb(31, 85, 136);
     }
 
     .done {
