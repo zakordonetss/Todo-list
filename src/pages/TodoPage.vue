@@ -19,6 +19,8 @@
                 :key="todo.id"
                 :todo="todo"
                 @remove-todo="removeTodo"
+                @edit-todo="editTodo"
+                @enter-todo="onEnter"
             />
         </ul>
     </div>
@@ -53,6 +55,18 @@ export default {
 
         addTodo(newTodo) {
             this.todos.push(newTodo)
+        },
+
+        editTodo(id) {
+            const index = this.todos.findIndex(todo => todo.id === id);
+            localStorage.setItem('editText', this.todos[index].text)
+            console.log(this.todos[index].text);
+        },
+
+        onEnter(id) {
+            const index = this.todos.findIndex(todo => todo.id === id);
+            this.todos[index].text = localStorage.getItem('editText');
+            console.log(localStorage.getItem('editText'));
         },
 
         logOut() {

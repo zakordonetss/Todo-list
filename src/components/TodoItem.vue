@@ -1,18 +1,36 @@
 <template>
     <div>
         <li>
-            <div class="text" :class="{done:todo.completed}">
-                <input 
-                    type="checkbox" 
-                    @change="todo.completed = !todo.completed"
-                >
-                {{todo.text}}
-            </div>
+            <div class="container">
+                <div class="text" :class="{done:todo.completed}">
+                    <label class='checkbox-other' for="">
+                        <input 
+                            type="checkbox" 
+                            @change="todo.completed = !todo.completed"
+                        >
+                    </label>
+                        
+                    {{todo.text}}
+                </div>
 
-            <button 
-                class="btn btn_delete"
-                @click="$emit('remove-todo', todo.id)"
-                >Delete</button>
+                <div class="container-btn">
+                    <button
+                        v-bind:class="{ activeBtn: isActiveEdit }" 
+                        class="btn btn-edit"
+                        @click="$emit('edit-todo', todo.id), edit(todo.id)"
+                    >Edit</button>
+                    <button 
+                        class="btn btn-delete"
+                        @click="$emit('remove-todo', todo.id)"
+                    >Delete</button>
+                </div>
+            </div>
+            <textarea 
+                class="hidden-input" 
+                v-bind:class="{ activeText: isActiveTextarea }" 
+                v-model="actualText"
+                @keyup.enter="$emit('enter-todo', todo.id)"
+            />
         </li>
     </div>
 </template>
@@ -24,9 +42,22 @@ export default {
         todo: {
             type: Object,
             required: true,
+        },
+    },
+
+    data() {
+        return {
+            isActiveTextarea: true,
+            isActiveEdit: true,
+            actualText: '',
         }
     },
+
     methods: {
+        edit(id) {
+            console.log(id);
+            this.isActive = !this.isActive;
+        },
     },
 }
 
@@ -34,8 +65,6 @@ export default {
 
 <style scoped>
     li {
-        display: flex;
-        justify-content: space-between;
         text-align: left;
         align-items: center;
         padding: 5px 20px;
@@ -44,21 +73,58 @@ export default {
         background-color: rgb(247, 247, 247);
     }
 
+    .container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
     input {
         margin-right: 15px;
     }
 
-    .btn_delete {
+    .hidden-input {
+        display: block;
+        width: 80%;
+        padding: 8px;
+        font-size: 18px;
+        border: 1px solid #333333;
+        margin: 10px;
+        outline: none;
+    }
+
+    .container-btn {
+        align-items: center;
+        text-align: center;
+    }
+
+    .btn-delete {
         background-color:darkred;
         color: white;
         cursor: pointer;
         border-color: darkred;
         height: 32px;
+        margin: 5px;
     }
 
-    .btn_delete:hover {
+    .btn-delete:hover {
         background-color:white;
         color: darkred;
+    }
+
+    .btn-edit {
+        display: none;
+        background-color: rgb(0, 83, 161);
+        color: white;
+        cursor: pointer;
+        border-color: rgb(0, 83, 161);
+        height: 32px;
+        margin: 5px;
+    }
+
+    .btn-edit:hover {
+        background-color:white;
+        color: rgb(0, 83, 161);
     }
 
     .done {
@@ -71,43 +137,47 @@ export default {
     }
 
     .checkbox-other {
-	display: block;
-	margin: 0 0 10px 0;
-	line-height: 22px;  
-}
+        display: block;
+        line-height: 22px;  
+        margin-right: 20px;
+    }
 
-.checkbox-other input[type=checkbox] {
-	-webkit-appearance: none;
-	-moz-appearance: none;
-	display: inline-block;
-	width: 22px;
-	height: 22px;
-	margin: 0 5px 0 0;
-	padding: 0;
-	vertical-align: top;
-	outline: none;
-	transition: background 0.3s ease;
-	background: url(https://snipp.ru/uploads/contents/checkbox-1.png) 0 0 no-repeat;
-	cursor: pointer;
-}
- 
-/* Checked */
-.checkbox-other input[type=checkbox]:checked {
-	background-image: url(https://snipp.ru/uploads/contents/checkbox-2.png);
-}
- 
-/* Focus */
-.focused input[type=checkbox] {
-	box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
-}
- 
-/* Hover */
-.checkbox-other input[type=checkbox]:hover {
-	filter: brightness(110%);
-}
- 
-/* Active */
-.checkbox-other input[type=checkbox]:active {
-	filter: brightness(80%);
-}
+    .checkbox-other input[type=checkbox] {
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        display: inline-block;
+        width: 22px;
+        height: 22px;
+        margin: 0 5px 0 0;
+        padding: 0;
+        vertical-align: top;
+        outline: none;
+        transition: background 0.3s ease;
+        background: url(https://snipp.ru/uploads/contents/checkbox-1.png) 0 0 no-repeat;
+        cursor: pointer;
+    }
+
+    .checkbox-other input[type=checkbox]:checked {
+        background-image: url(https://snipp.ru/uploads/contents/checkbox-2.png);
+    }
+
+    .focused input[type=checkbox] {
+        box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
+    }
+    
+    .checkbox-other input[type=checkbox]:hover {
+        filter: brightness(110%);
+    }
+    .checkbox-other input[type=checkbox]:active {
+        filter: brightness(80%);
+    }
+
+    .activeText {
+        display: block;
+    }
+
+    .activeBtn {
+        display: inline-block;
+    }
+    
 </style>
