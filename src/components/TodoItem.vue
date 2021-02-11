@@ -15,9 +15,9 @@
 
                 <div class="container-btn">
                     <button
-                        v-bind:class="{ activeBtn: isActiveEdit }" 
+                        :class="{ activeBtn:todo.isActiveEdit }" 
                         class="btn btn-edit"
-                        @click="$emit('edit-todo', todo.id), edit(todo.id)"
+                        @click="onEdit(todo.id, todo.text)"
                     >Edit</button>
                     <button 
                         class="btn btn-delete"
@@ -26,10 +26,10 @@
                 </div>
             </div>
             <textarea 
-                class="hidden-input" 
-                v-bind:class="{ activeText: isActiveTextarea }" 
+                class="hidden-textarea" 
+                :class="{ activeText:todo.isActiveTextarea }" 
                 v-model="actualText"
-                @keyup.enter="$emit('enter-todo', todo.id)"
+                @keyup.enter="onEnter(todo.id)"
             />
         </li>
     </div>
@@ -47,17 +47,21 @@ export default {
 
     data() {
         return {
-            isActiveTextarea: true,
-            isActiveEdit: true,
             actualText: '',
         }
     },
 
     methods: {
-        edit(id) {
-            console.log(id);
+        onEdit(id, text) {
+            this.actualText = text;
             this.isActive = !this.isActive;
+            this.$emit('edit-todo', id);
         },
+
+        onEnter(id) {
+            localStorage.setItem('editText', this.actualText)
+            this.$emit('enter-todo', id)
+        }
     },
 }
 
@@ -83,8 +87,8 @@ export default {
         margin-right: 15px;
     }
 
-    .hidden-input {
-        display: block;
+    .hidden-textarea {
+        display: none;
         width: 80%;
         padding: 8px;
         font-size: 18px;

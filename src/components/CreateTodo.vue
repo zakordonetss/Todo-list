@@ -18,7 +18,9 @@ export default {
                 const newTodo = {
                     id: Date.now(),
                     text: this.text,
-                    completed: false
+                    completed: false,
+                    isActiveTextarea: false, 
+                    isActiveEdit: true,
                 }
                 this.$emit("add-todo", newTodo);
                 this.text = '';

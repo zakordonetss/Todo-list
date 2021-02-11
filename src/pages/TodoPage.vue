@@ -13,6 +13,8 @@
             @add-todo="addTodo"
          />
         <h2>Todos List</h2>
+        <hr>
+        <h5 v-if="todos.length == 0">There are no notes yet. Please add the first one!</h5>
         <ul>
             <TodoItem 
                 v-for="todo of todos"
@@ -39,9 +41,9 @@ export default {
     data() {
       return {
           todos: [
-              {id: 1, text: 'Todo 1', completed: false},
-              {id: 2, text: 'Todo 2', completed: false},
-              {id: 3, text: 'Todo 3', completed: false},
+              {id: 1, text: 'Todo 1', completed: false, isActiveTextarea: false, isActiveEdit: true},
+              {id: 2, text: 'Todo 2', completed: false, isActiveTextarea: false, isActiveEdit: true},
+              {id: 3, text: 'Todo 3', completed: false, isActiveTextarea: false, isActiveEdit: true},
           ],
 
           username: localStorage.getItem('username'),
@@ -50,30 +52,51 @@ export default {
 
     methods: {
         removeTodo(id) {
-            this.todos = this.todos.filter(todo => todo.id != id)
+            const index = this.getIndexById(id);
+            this.todos.splice(index, 1)
         },
 
         addTodo(newTodo) {
-            this.todos.push(newTodo)
+            this.todos.push(newTodo);
         },
 
         editTodo(id) {
-            const index = this.todos.findIndex(todo => todo.id === id);
-            localStorage.setItem('editText', this.todos[index].text)
-            console.log(this.todos[index].text);
+            const index = this.getIndexById(id);
+            this.textareaActivate(index);
+            localStorage.setItem('editText', this.todos[index].text);
         },
 
         onEnter(id) {
-            const index = this.todos.findIndex(todo => todo.id === id);
-            this.todos[index].text = localStorage.getItem('editText');
-            console.log(localStorage.getItem('editText'));
+            const index = this.getIndexById(id);
+            if (!localStorage.getItem('editText').trim()) {
+                this.removeTodo(id);
+                return;
+            } else {
+                this.todos[index].text = localStorage.getItem('editText');
+                localStorage.removeItem('editText');
+                this.editActivate(index);
+            }
         },
 
         logOut() {
             localStorage.removeItem("username");
-            localStorage.removeItem("logedIn")
-            this.$router.push('/')
+            localStorage.removeItem("logedIn");
+            this.$router.push('/');
         },
+
+        textareaActivate(i) {
+            this.todos[i].isActiveTextarea = !this.todos[i].isActiveTextarea;
+            this.todos[i].isActiveEdit = !this.todos[i].isActiveEdit;
+        },
+
+        editActivate(i) {
+            this.todos[i].isActiveTextarea = !this.todos[i].isActiveTextarea;
+            this.todos[i].isActiveEdit = !this.todos[i].isActiveEdit;
+        },
+
+        getIndexById(id) {
+            return this.todos.findIndex(todo => todo.id === id);
+        }
     },
 
     created() {
