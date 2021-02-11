@@ -10,6 +10,10 @@ export default new VueRouter({
             component: LoginPage
         },
         {
+            path: '/login',
+            component: LoginPage
+        },
+        {
             path: '/todo',
             component: TodoPage
         },

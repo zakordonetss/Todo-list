@@ -31,17 +31,44 @@ export default {
 </script>
 
 <style scoped>
-    input {
-        display: block;
-        width: 98%;
-        padding: 8px;
-        font-size: 18px;
-        border: 1px solid #333333;
-        margin-bottom: 1rem;
-        outline: none;
-    }
-    
-    .btn {
-        display: block;
-    }
+form {
+    align-items: center;
+}
+
+input {
+    display: block;
+    width: 98%;
+    padding: 8px;
+    font-size: 18px;
+    border: 1px solid #333333;
+    margin: 0 auto 10px;
+    outline: none;
+}
+
+.btn {
+    display: block;
+}
+
+/* =================== media queries ====================*/
+
+@media (max-width: 1024px) {
+input {
+    width: 95%;
+}
+
+.btn {
+    margin: 0 auto 20px;
+}
+}
+
+@media (max-width: 768px) {
+input {
+    width: 90%;
+    margin-bottom: 25px;
+}
+
+.btn {
+    margin-bottom: 30px;
+}
+}
 </style>

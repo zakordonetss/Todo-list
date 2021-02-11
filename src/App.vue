@@ -22,7 +22,8 @@ export default {
   color: #333333;
 
   margin: 0 auto;
-  max-width: 800px;
+  padding: 0 10px;
+  max-width: 1000px;
 }
 
 body {
@@ -77,13 +78,35 @@ body {
 }
 
 .btn-bar:hover {
-    /* text-decoration: underline; */
     background-color: #1a1a1a;
 }
 
 .router-link {
     color: inherit;
     text-transform: none;
+}
+
+/* =================== media queries ====================*/
+
+@media (max-width: 1024px) {
+#app {
+  padding: 0;
+}
+}
+
+@media (max-width: 768px) {
+#app {
+  max-width: 768px;
+}
+}
+
+@media (max-width: 480px) {
+
+#app {
+  max-width: 480px;
+  font-size: 16px;
+}
+
 }
 
 </style>

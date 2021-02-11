@@ -82,37 +82,49 @@ export default {
 </script>
 
 <style scoped>
-    input {
-        display: block;
-        width: 100%;
-        padding: 5px;
-        font-size: 14px;
-        border: 1px solid #333333;
-        margin: 30px auto 0;
-        outline: none;
-    }
+input {
+    display: block;
+    width: 100%;
+    padding: 5px;
+    font-size: 14px;
+    border: 1px solid #333333;
+    margin: 30px auto 0;
+    outline: none;
+}
 
-    .wrapper {
-        display: block;
-        margin: 0 auto;
-        max-width: 300px;
-        position: relative;
-    }
+.wrapper {
+    display: block;
+    margin: 0 auto;
+    max-width: 300px;
+    position: relative;
+}
 
-    .error-message {
-        position: absolute;
-        left: 6px;
-        bottom: -18px;
-        font-size: 12px;
-        color: rgb(201, 0, 0);
-        text-align: start;
-    }
+.error-message {
+    position: absolute;
+    left: 6px;
+    bottom: -18px;
+    font-size: 12px;
+    color: rgb(201, 0, 0);
+    text-align: start;
+}
 
-    .invalid {
-        border-color: rgb(201, 0, 0);
-    }
+.invalid {
+    border-color: rgb(201, 0, 0);
+}
 
-    .invalid::placeholder {
-        color: rgb(201, 0, 0);
-    }
+.invalid::placeholder {
+    color: rgb(201, 0, 0);
+}
+
+/* =================== media queries ====================*/
+
+@media (max-width: 1024px) {
+}
+
+@media (max-width: 768px) {
+}
+
+@media (max-width: 480px) {
+
+}
 </style>

@@ -68,120 +68,153 @@ export default {
 </script>
 
 <style scoped>
-    li {
-        text-align: left;
-        align-items: center;
-        padding: 5px 20px;
-        margin-bottom: 10px;
-        font-size: 20px;
-        background-color: rgb(247, 247, 247);
-    }
+li {
+    text-align: left;
+    align-items: center;
+    padding: 5px 20px;
+    margin-bottom: 10px;
+    font-size: 20px;
+    background-color: rgb(247, 247, 247);
+}
 
-    .container {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
+.container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
 
-    input {
-        margin-right: 15px;
-    }
+input {
+    margin-right: 15px;
+}
 
-    .hidden-textarea {
-        display: none;
-        width: 80%;
-        padding: 8px;
-        font-size: 18px;
-        border: 1px solid #333333;
-        margin: 10px;
-        outline: none;
-    }
+.hidden-textarea {
+    display: none;
+    width: 80%;
+    padding: 8px;
+    font-size: 18px;
+    border: 1px solid #333333;
+    margin: 10px;
+    outline: none;
+}
 
-    .container-btn {
-        align-items: center;
-        text-align: center;
-    }
+.container-btn {
+    align-items: center;
+    text-align: right;
+}
 
-    .btn-delete {
-        background-color:rgb(179, 49, 49);
-        color: white;
-        cursor: pointer;
-        border-color: rgb(179, 49, 49);
-        height: 32px;
-        margin: 5px;
-    }
+.btn-delete {
+    background-color:rgb(179, 49, 49);
+    color: white;
+    cursor: pointer;
+    border-color: rgb(179, 49, 49);
+    height: 32px;
+    width: 92px;
+    margin: 5px;
+}
 
-    .btn-delete:hover {
-        background-color:white;
-        color: rgb(179, 49, 49);
-    }
+.btn-delete:hover {
+    background-color:white;
+    color: rgb(179, 49, 49);
+}
 
-    .btn-edit {
-        display: none;
-        background-color: rgb(31, 85, 136);
-        color: white;
-        cursor: pointer;
-        border-color: rgb(31, 85, 136);
-        height: 32px;
-        margin: 5px;
-    }
+.btn-edit {
+    display: none;
+    background-color: rgb(31, 85, 136);
+    color: white;
+    cursor: pointer;
+    border-color: rgb(31, 85, 136);
+    height: 32px;
+    width: 92px;
+    margin: 5px;
+}
 
-    .btn-edit:hover {
-        background-color:white;
-        color: rgb(31, 85, 136);
-    }
+.btn-edit:hover {
+    background-color:white;
+    color: rgb(31, 85, 136);
+}
 
-    .done {
-        text-decoration: line-through;
-    }
+.done {
+    text-decoration: line-through;
+}
 
-    .text {
-        display: flex;
-        align-items: center;
-    }
+.text {
+    display: flex;
+    text-align: left;
+    align-items: center;
+    padding-right: 10px;
+}
 
-    .checkbox-other {
-        display: block;
-        line-height: 22px;  
-        margin-right: 20px;
-    }
+.checkbox-other {
+    display: block;
+    line-height: 22px;  
+    margin-right: 20px;
+}
 
-    .checkbox-other input[type=checkbox] {
-        -webkit-appearance: none;
-        -moz-appearance: none;
-        display: inline-block;
-        width: 22px;
-        height: 22px;
-        margin: 0 5px 0 0;
-        padding: 0;
-        vertical-align: top;
-        outline: none;
-        transition: background 0.3s ease;
-        background: url(https://snipp.ru/uploads/contents/checkbox-1.png) 0 0 no-repeat;
-        cursor: pointer;
-    }
+.checkbox-other input[type=checkbox] {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    display: inline-block;
+    width: 22px;
+    height: 22px;
+    margin: 0 5px 0 0;
+    padding: 0;
+    vertical-align: top;
+    outline: none;
+    transition: background 0.3s ease;
+    background: url(https://snipp.ru/uploads/contents/checkbox-1.png) 0 0 no-repeat;
+    cursor: pointer;
+}
 
-    .checkbox-other input[type=checkbox]:checked {
-        background-image: url(https://snipp.ru/uploads/contents/checkbox-2.png);
-    }
+.checkbox-other input[type=checkbox]:checked {
+    background-image: url(https://snipp.ru/uploads/contents/checkbox-2.png);
+}
 
-    .focused input[type=checkbox] {
-        box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
-    }
-    
-    .checkbox-other input[type=checkbox]:hover {
-        filter: brightness(110%);
-    }
-    .checkbox-other input[type=checkbox]:active {
-        filter: brightness(80%);
-    }
+.focused input[type=checkbox] {
+    box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
+}
 
-    .activeText {
-        display: block;
-    }
+.checkbox-other input[type=checkbox]:hover {
+    filter: brightness(110%);
+}
+.checkbox-other input[type=checkbox]:active {
+    filter: brightness(80%);
+}
 
-    .activeBtn {
-        display: inline-block;
-    }
+.activeText {
+    display: block;
+}
+
+.activeBtn {
+    display: inline-block;
+}
+
+/* =================== media queries ====================*/
+
+
+@media (max-width: 768px) {
+li {
+    font-size: 16px;
+    padding: 15px;
+}
+
+.container {
+    flex-direction: column;
+}
+
+input {
+    margin-right: 15px;
+}
+
+.text {
+    width: 90%;
+    margin-bottom: 15px;
+}
+
+.hidden-textarea {
+    margin: 0 auto;
+    margin-top: 10px;
+}
+
+}
     
 </style>
