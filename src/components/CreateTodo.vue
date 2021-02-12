@@ -19,8 +19,7 @@ export default {
                     id: Date.now(),
                     text: this.text,
                     completed: false,
-                    isActiveTextarea: false, 
-                    isActiveEdit: true,
+                    editToggle: false, 
                 }
                 this.$emit("add-todo", newTodo);
                 this.text = '';

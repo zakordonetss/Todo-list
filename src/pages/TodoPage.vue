@@ -40,9 +40,9 @@ export default {
     data() {
       return {
           todos: [
-            //   {id: 1, text: 'Todo 1', completed: false, isActiveTextarea: false, isActiveEdit: true},
-            //   {id: 2, text: 'Todo 2', completed: false, isActiveTextarea: false, isActiveEdit: true},
-            //   {id: 3, text: 'Todo 3', completed: false, isActiveTextarea: false, isActiveEdit: true},
+            //   {id: 1, text: 'Todo 1', completed: false, editToggle: false},
+            //   {id: 2, text: 'Todo 2', completed: false, editToggle: false},
+            //   {id: 3, text: 'Todo 3', completed: false, editToggle: false},
           ],
 
           username: localStorage.getItem('username'),
@@ -63,7 +63,7 @@ export default {
 
         editTodo(id) {
             const index = this.getIndexById(id);
-            this.textareaActivate(index);
+            this.setEditToggle(index);
             localStorage.setItem('editText', this.todos[index].text);
         },
 
@@ -76,7 +76,7 @@ export default {
             } else {
                 this.todos[index].text = localStorage.getItem('editText');
                 localStorage.removeItem('editText');
-                this.editActivate(index);
+                this.setEditToggle(index);
             }
 
             this.setLocalTodos();
@@ -84,27 +84,21 @@ export default {
 
         logOut() {
             localStorage.removeItem("username");
-            localStorage.removeItem("logedIn");
+            localStorage.removeItem("loggedIn");
             this.$router.push('/login');
         },
 
-        // Helper methods ===========================
+        // Helper Methods ===========================
 
-        textareaActivate(i) {
-            this.todos[i].isActiveTextarea = !this.todos[i].isActiveTextarea;
-            this.todos[i].isActiveEdit = !this.todos[i].isActiveEdit;
-        },
-
-        editActivate(i) {
-            this.todos[i].isActiveTextarea = !this.todos[i].isActiveTextarea;
-            this.todos[i].isActiveEdit = !this.todos[i].isActiveEdit;
+        setEditToggle(i) {
+            this.todos[i].editToggle = !this.todos[i].editToggle;
         },
 
         getIndexById(id) {
             return this.todos.findIndex(todo => todo.id === id);
         },
 
-        // Methods for LocalStorage ====================
+        // LocalStorage Methods ====================
 
         setLocalTodos() {
             const todosJSON = JSON.stringify(this.todos);
@@ -117,7 +111,7 @@ export default {
     },
 
     created() {
-        if (!localStorage.getItem('logedIn')) this.$router.push('/login');
+        if (!localStorage.getItem('loggedIn')) this.$router.push('/login');
 
         if (localStorage.getItem('todos')) {
             this.getLocalTodos()

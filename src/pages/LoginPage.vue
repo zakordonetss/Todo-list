@@ -70,13 +70,13 @@ export default {
                 return
             }
             localStorage.setItem('username', this.username);
-            localStorage.setItem('logedIn', true);
+            localStorage.setItem('loggedIn', true);
             this.$router.push('/todo');
         }
     },
 
     created() {
-        if (localStorage.getItem('logedIn')) this.$router.push('/todo');
+        if (localStorage.getItem('loggedIn')) this.$router.push('/todo');
     },
 }
 </script>

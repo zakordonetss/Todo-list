@@ -16,7 +16,7 @@
                 <div class="container-btn">
                     <button
                         class="btn btn-edit"
-                        @click="onEdit(todo.id, todo.text, todo.isActiveEdit)"
+                        @click="onEdit(todo.id, todo.text, todo.editToggle)"
                     >{{ textButton }}</button>
                     <button 
                         class="btn btn-delete"
@@ -26,7 +26,7 @@
             </div>
             <textarea 
                 class="hidden-textarea" 
-                :class="{ activeText:todo.isActiveTextarea }" 
+                :class="{ activeText:todo.editToggle }" 
                 v-model="actualText"
                 @keyup.enter="onEnter(todo.id)"
             />
@@ -52,10 +52,9 @@ export default {
     },
 
     methods: {
-        onEdit(id, text, isActiveEdit) {
-            if (isActiveEdit) {
+        onEdit(id, text, editToggle) {
+            if (!editToggle) {
                 this.actualText = text;
-                this.isActive = !this.isActive;
                 this.$emit('edit-todo', id, text);
                 this.textButton = 'Post';
             } else {
@@ -152,7 +151,7 @@ input {
     display: flex;
     text-align: left;
     align-items: center;
-    padding-right: 10px;
+    padding: 10px;
 }
 
 .checkbox-other {
