@@ -14,11 +14,12 @@
                 </div>
 
                 <div class="container-btn">
+                    <!-- :class="{ activeBtn:todo.isActiveEdit }"  -->
                     <button
-                        :class="{ activeBtn:todo.isActiveEdit }" 
+                        
                         class="btn btn-edit"
-                        @click="onEdit(todo.id, todo.text)"
-                    >Edit</button>
+                        @click="onEdit(todo.id, todo.text, todo.isActiveEdit)"
+                    >{{ textButton }}</button>
                     <button 
                         class="btn btn-delete"
                         @click="$emit('remove-todo', todo.id)"
@@ -48,14 +49,22 @@ export default {
     data() {
         return {
             actualText: '',
+            textButton: 'Edit',
         }
     },
 
     methods: {
-        onEdit(id, text) {
-            this.actualText = text;
-            this.isActive = !this.isActive;
-            this.$emit('edit-todo', id);
+        onEdit(id, text, isActiveEdit) {
+            if (isActiveEdit) {
+                this.actualText = text;
+                this.isActive = !this.isActive;
+                this.$emit('edit-todo', id);
+                this.textButton = 'Post';
+            } else {
+                localStorage.setItem('editText', this.actualText)
+                this.$emit('enter-todo', id);
+                this.textButton = 'Edit';
+            }
         },
 
         onEnter(id) {
@@ -74,7 +83,8 @@ li {
     padding: 5px 20px;
     margin-bottom: 10px;
     font-size: 20px;
-    background-color: rgb(247, 247, 247);
+    box-shadow: 2px 3px 7px 0 rgba(0,0,0,0.2);
+    border: 1px solid rgba(0, 0, 0, 0.05);
 }
 
 .container {
@@ -89,21 +99,24 @@ input {
 
 .hidden-textarea {
     display: none;
-    width: 80%;
+    width: 70%;
     padding: 8px;
-    font-size: 18px;
-    border: 1px solid #333333;
-    margin: 10px;
+    font-size: 17px;
+    margin: 10px 10px 10px 45px;
     outline: none;
+    resize:none;
+    box-shadow: 2px 3px 5px 0 rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(0, 0, 0, 0.15);
 }
 
 .container-btn {
+    display: flex;
     align-items: center;
     text-align: right;
 }
 
 .btn-delete {
-    background-color:rgb(179, 49, 49);
+    background-color:rgba(179, 49, 49);
     color: white;
     cursor: pointer;
     border-color: rgb(179, 49, 49);
@@ -118,11 +131,11 @@ input {
 }
 
 .btn-edit {
-    display: none;
-    background-color: rgb(31, 85, 136);
+    display: inline-block;
+    background-color: #008F68;
     color: white;
     cursor: pointer;
-    border-color: rgb(31, 85, 136);
+    border-color: #008F68;
     height: 32px;
     width: 92px;
     margin: 5px;
@@ -130,7 +143,7 @@ input {
 
 .btn-edit:hover {
     background-color:white;
-    color: rgb(31, 85, 136);
+    color: #008F68;;
 }
 
 .done {
@@ -189,12 +202,26 @@ input {
 }
 
 /* =================== media queries ====================*/
+@media (max-width: 1024px) {
+li {
+    
+    padding: 15px;
+    margin: 0 auto 10px;
+    width: 90%;
+}
+
+.hidden-textarea {
+    width: 60%;
+}
+
+}
 
 
 @media (max-width: 768px) {
 li {
     font-size: 16px;
     padding: 15px;
+    width: 85%;
 }
 
 .container {
@@ -205,6 +232,10 @@ input {
     margin-right: 15px;
 }
 
+.hidden-textarea {
+    font-size: 14px;
+}
+
 .text {
     width: 90%;
     margin-bottom: 15px;
@@ -213,6 +244,7 @@ input {
 .hidden-textarea {
     margin: 0 auto;
     margin-top: 10px;
+    width: 70%;
 }
 
 }

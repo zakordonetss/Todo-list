@@ -13,7 +13,6 @@
             @add-todo="addTodo"
          />
         <h3>Todos List</h3>
-        <hr>
         <h5 v-if="todos.length == 0">There are no notes yet. Please add the first one!</h5>
         <ul>
             <TodoItem 
