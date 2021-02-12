@@ -14,9 +14,7 @@
                 </div>
 
                 <div class="container-btn">
-                    <!-- :class="{ activeBtn:todo.isActiveEdit }"  -->
                     <button
-                        
                         class="btn btn-edit"
                         @click="onEdit(todo.id, todo.text, todo.isActiveEdit)"
                     >{{ textButton }}</button>
@@ -58,11 +56,11 @@ export default {
             if (isActiveEdit) {
                 this.actualText = text;
                 this.isActive = !this.isActive;
-                this.$emit('edit-todo', id);
+                this.$emit('edit-todo', id, text);
                 this.textButton = 'Post';
             } else {
                 localStorage.setItem('editText', this.actualText)
-                this.$emit('enter-todo', id);
+                this.$emit('enter-todo', id, text);
                 this.textButton = 'Edit';
             }
         },
@@ -197,10 +195,6 @@ input {
     display: block;
 }
 
-.activeBtn {
-    display: inline-block;
-}
-
 /* =================== media queries ====================*/
 @media (max-width: 1024px) {
 li {
@@ -213,7 +207,6 @@ li {
 .hidden-textarea {
     width: 60%;
 }
-
 }
 
 
